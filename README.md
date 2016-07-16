@@ -100,15 +100,15 @@ ReactRouterSSR.Run(AppRoutes, {
     onUpdate() {
       // Notify the page has been changed to Google Analytics
       ga('send', 'pageview');
-    },
-    htmlHook(html) {
-      const head = ReactHelmet.rewind();
-      return data.replace('<head>', '<head>' + head.title + head.base + head.meta + head.link + head.script);
     }
   }
 }, {
   preRender: function(req, res) {
     ReactCookie.plugToRequest(req, res);
+  },
+  htmlHook(html) {
+    const head = ReactHelmet.rewind();
+    return data.replace('<head>', '<head>' + head.title + head.base + head.meta + head.link + head.script);
   }
 });
 
